@@ -26,11 +26,43 @@ nav > a:hover{
     background-color: white;
     color: black;
 }
+span#burger{
+    display: block;
+    text-align: center;
+    color: white;
+    padding: 5px;
+    margin-top: 30px;
+}
+span#burger:hover{
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    cursor: pointer;
+}
+menu{
+    display: none;
+}
+menu > ul{
+    list-style-type: none;
+}
+menu > ul > li{
+    width: 80%;
+}
+menu > ul > li > a{
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+    text-align: center;
+    color: white;
+}
+menu > ul > li > a:hover{
+    background-color: rgb(255, 255, 255);
+    color: black;
+}
 section{
+    text-align: center;
     background-color: rgb(0, 0, 0);
     color: white;
 }
-span{
-    font-family: cursive;
-    font-size: 0.9em;
+section#wiki > article > img{
+    width: 300px;
 }
