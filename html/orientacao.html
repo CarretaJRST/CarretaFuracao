@@ -8,7 +8,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <title>Carreta Furacão</title>
 </head>
-<body style=>
+<body onclick="clickMenu()">
     <header>
         <h1>
             GRUPO CARRETA FURACÃO
@@ -106,22 +106,12 @@
         <p style="text-align: justify;">Esse site foi criado como um presente para todos do grupo no mês de maio, amo vcs rapaziada - by Rian, maio de 2023</p>
     </footer>
     <script>
-        function clickMenu(){
-            if(items.style.display == 'block'){
-                items.style.display = 'none';
-        }
-        else{
-            items.style.display = 'block'
-        }
+        function clickMenu() {
+            const escolha = ['../midia/SnapSave.io - [EFEITO SONORO] DEMAIS RODRIGO FARO (320 kbps).mp3', '../midia/SnapSave.io - aow potencia   0001 (320 kbps).mp3', '../midia/SnapSave.io - Cavalo vinhetas (320 kbps).mp3', '../midia/SnapSave.io - Dança Gatinho, Dança Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - efeitos sonoros do programa do Ratinho (super estourado) (320 kbps).mp3', '../midia/SnapSave.io - Esse é meu patrão - (áudio) (320 kbps).mp3', '../midia/SnapSave.io - Programa do Ratinho - SFX _Ratinhooo_ original (320 kbps).mp3', '../midia/SnapSave.io - Uepa Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Ui - Efeito Sonoro (320 kbps).mp3']
+            const aleatorio = Math.floor(Math.random() * (8 - 0) + 0);           
+            const audio = new Audio(escolha[aleatorio])
+            audio.play();
     }
-    function mudouTamanho(){
-        if(window.innerWidth >= 768){
-            items.style.display = 'block'
-        }
-        else{
-            items.style.display = 'none'
-        }
-        }
     </script>
 </body>
 </html>
