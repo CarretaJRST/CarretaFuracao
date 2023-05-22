@@ -4,9 +4,87 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tiago</title>
+    <style>
+        body, html{
+            padding: 0px;
+            margin: 0px;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            text-align: justify;
+            background-color: rgb(17, 29, 0);
+        }
+        section{
+            background-color: white;
+            padding: 0px;
+        }
+        section#max{
+            text-align: center;
+            background-color: rgb(17, 29, 0);
+            color: white;
+            padding: 0px;
+        }
+        img{
+            
+            height: 100%;
+            margin: auto;
+        }
+        h1{
+            margin: 0px;
+            text-align: center;
+            font-style: oblique;
+        }
+        div#audi{
+            text-align: center;
+        }
+        img#r{
+            width: 100%;
+            height: 50%;
+        }
+    </style>
 </head>
 <body>
-    
+    <section id="audi" onclick="clickMenu1()">
+        <p>Meu nome é Tiago Gomes, tenho 18 anos e sou meio anti-mulher. Sigo as misoginias padrões de Sanderson Kenny (vulgo meu chiclete) e tento ser o mais racional e moralista do grupo. Amo debater com Rian e Sanderson os mais diversos assuntos, desde mulheres, namoros e piranhagens, até sobre como o apóstolo Paulo sobreviveu a 2 NAUFRÁGIOS em alto-mar (o cara era brabo), coisas sobre Jeová, Jesus e outras curiosidades bíblicas. Às vezes me faço de santo, mas falo muita merda. Sou Aprendiz de Piranha.</p>
+    </section>
+    <section id="max">
+        <img src="../Imagens/Screenshot_20230522-171103(1).png" alt="" onclick="clickMenu1()">
+        <span onclick="clickMenu()" id="aud">
+            <p>Queria ser um casaco, mas um casaco <br>não posso ser, porque casaco esquenta <br> todos nós, e eu só queria esquentar você</p>
+        </span>
+    </section>
+    <div id="audi">
+        <audio preload="metadata" controls loop>
+            <source src="../midia/SnapSave.io - TheFatRat - Fly Away (Lyrics) feat. Anjulie (320 kbps).mp3" type="audio/mpeg">
+            <p>Infelizmente seu navegador não consegue reproduzir o arquivo. Clique para baixá-lo: <a href="../midia/SnapSave.io - TheFatRat - Fly Away (Lyrics) feat. Anjulie (320 kbps).mp3"></a> AQUI!!!</p>
+        </audio>
+    </div>
+    <br>
+    <h1 style="color: white">De Hoje Tá Pago - by Tiago Bodybuilder, 2023</h1>
+     <img src="../Imagens/pngegg.png" alt="" id="r">
+    <script>
+        function clickMenu() {
+            const audio = new Audio('../midia/SnapSave.io - Programa do Ratinho - SFX _Ratinhooo_ original (320 kbps).mp3')
+            if(aud.style.display == 'block'){
+                
+                audio.play();
+        }
+        else{
+            aud.style.display = 'block'
+            audio.play();
+        }
+    }
+        function clickMenu1(){
+            const audio = new Audio('../midia/SnapSave.io - efeitos sonoros do programa do Ratinho (super estourado) (320 kbps).mp3')
+            if(aud.style.display == 'block'){
+                audio.play();
+        }
+        else{
+            aud.style.display = 'block'
+            audio.play();
+        }
+    }
+    </script>
 </body>
 </html>

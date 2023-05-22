@@ -4,9 +4,90 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Sand</title>
+    <style>
+        body, html{
+            padding: 0px;
+            margin: 0px;
+            height: 100vh;
+            font-family: Arial, Helvetica, sans-serif;
+            font-weight: bold;
+            text-align: justify;
+            background-color: rgb(0, 0, 29);
+        }
+        section{
+            background-color: white;
+            padding: 0px;
+        }
+        section#max{
+            text-align: center;
+            background-color: rgb(0, 0, 29);
+            color: white;
+            padding: 0px;
+        }
+        img{
+            
+            height: 100%;
+            margin: auto;
+        }
+        h1{
+            margin: 0px;
+            text-align: center;
+            font-style: oblique;
+        }
+        div#aud{
+            display: none;
+        }
+        
+    </style>
 </head>
 <body>
-    
+    <section id="audi" onclick="clickMenu()">
+        <p>
+            Meu nome é Sanderson Kenny Coutinho Martins (ou o contrário, sei lá KKKKKKK), tenho 19 anos e já sou habilitado com certificação em pegar qualquer tipo de meninas... Digo, sou habilitado pra dirigir motos e carros. Sou parkuzeiro, amo escalar paredes e gosto de andar de skate atrapalhando o trânsito na Baixada sempre que possível. Finjo que sou misógino, mas sou o primeiro a ficar de fogo com uma novinha, meu sonho é virar DJ pra botar o sons do Rodrigo Faro em determinados estabelecimentos. Também sou aspirante a Professor de Educação Física (OBS: Vou educar fisicamente muita gatinha por aí... HEHE BOY), namoro carros tunados nas horas vagas e sou memeiro. Piranha Mestre.
+        </p>
+    </section>
+    <section id='max'>
+        <h1>Tá Ferrado Meu Parceiro 🔫</h1>
+        <img src="../Imagens/IMG-20201120-WA0133.jpg" alt="Sanderson Bêbado" onclick="clickMenu1()">
+    </section>
+    <section id="max">
+        <img src="../Imagens/Maxzada.jpg" alt="M">
+        <p>
+        <span id="link" onclick="clickMenu()">Gata, me diz que sou todo seu e me leva pra sua casa,<br> pois eu prometo que vou te deixar no Modo Turbo</span> </p>
+        <div id="aud">
+            
+        </div>
+        <div id="audi">
+            <audio preload="metadata" controls loop>
+                <source src="../midia/SnapSave.io - Galantis - Runaway (U & I) [Official Audio] (320 kbps).mp3" type="audio/mpeg">
+                <p>Infelizmente seu navegador não consegue reproduzir o arquivo. Clique para baixá-lo: <a href="../midia/SnapSave.io - Galantis - Runaway (U & I) [Official Audio] (320 kbps).mp3"></a> AQUI!!!</p>
+            </audio>
+        </div>
+    </section>
+    <script>
+        function clickMenu() {
+            const audio = new Audio('../midia/SnapSave.io - Cavalo vinhetas (320 kbps).mp3')
+            if(aud.style.display == 'block'){
+                aud.style.display = 'none';
+                audio.play();
+        }
+        else{
+            aud.style.display = 'block'
+            audio.play();
+        }
+    }
+        function clickMenu1(){
+            const audio = new Audio('../midia/SnapSave.io - aow potencia   0001 (320 kbps).mp3')
+            if(aud.style.display == 'block'){
+                aud.style.display = 'none';
+                audio.play();
+        }
+        else{
+            aud.style.display = 'block'
+            audio.play();
+        }
+    }
+    </script>
 </body>
 </html>
