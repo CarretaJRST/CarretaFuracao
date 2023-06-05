@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Jogo de Detetive</title>
+    <style type="text/css">
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+            background-color: #000000;
+        }
+
+        .container {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+            padding: 10px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        h1 {
+            margin-top: 0;
+            color: #555;
+        }
+
+        .question {
+            margin: 20px 0;
+        }
+
+        .options {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .btn {
+            margin: 5px;
+            padding: 10px 10px;
+            border: none;
+            background-color: #ddd;
+            color: #555;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .btn:hover {
+            background-color: #ccc;
+        }
+
+        .btn.selected {
+            background-color: #5cb85c;
+            color: #fff;
+        }
+
+        .submit-btn,
+        .restart-btn {
+            margin-top: 20px;
+            padding: 10px 20px;
+            border: none;
+            background-color: #5cb85c;
+            color: #fff;
+            font-size: 16px;
+            cursor: pointer;
+            border-radius: 5px;
+        }
+
+        .submit-btn:hover,
+        .restart-btn:hover {
+            background-color: #449d44;
+        }
+
+        .restart-btn.hidden {
+            display: none;
+        }
+
+        .score {
+            margin-bottom: 20px;
+            font-size: 20px;
+            font-weight: bold;
+        }
+
+        .error {
+            margin-bottom: 20px;
+            color: red;
+        }
+
+        .error.hidden {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Quiz</h1>
+        <div class="question" id="question">
+            <p class="question-text"></p>
+        </div>
+        <div class="options" id="options">
+            <button class="btn" onClick="checkAnswer(this.innerText)"></button>
+            <button class="btn" onClick="checkAnswer(this.innerText)"></button>
+            <button class="btn" onClick="checkAnswer(this.innerText)"></button>
+            <button class="btn" onClick="checkAnswer(this.innerText)"></button>
+        </div>
+        <button class="submit-btn" id="submit-btn" onClick="submitAnswer()">Enviar</button>
+        <button class="restart-btn hidden" id="restart-btn" onClick="restartGame()">Reiniciar</button>
+        <div class="score">Pontuação: <span class="score-display" id="score-display">0</span></div>
+        <div class="error hidden" id="error"></div>
+    </div>
+
+    <script type="text/javascript">
+        // Array de perguntas e respostas
+        const questions = [
+            {
+                question: 'Quem é o mais fogarento do grupo?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Juan'
+            },
+            {
+                question: 'Quem é o mais pistola?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Rian'
+            },
+            {
+                question: 'Quem é mais piranha?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Sanderson'
+            },
+            {
+                question: 'Quem é mais falso moralista?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Tiago'
+            },
+            {
+                question: 'Quem pega mais meninas no off?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Sanderson'
+            },
+            {
+                question: 'Quem fica de rolo com menina e depois disfarça?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Rian'
+            },
+            {
+                question: 'Quem é mais pobre nojento?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Juan'
+            },
+            {
+                question: 'O que o Tiago SEMPRE apoia na vida dele?',
+                options: ['Esse grupo', 'Ele mesmo', 'Sanderson', 'Misoginia'],
+                answer: 'Sanderson'
+            },
+            {
+                question: 'O que o Sand sempre faz quando está a ponto de ser vencido no argumento?',
+                options: ['Retruca tudo', 'Faz a egípcia', 'Fica revoltada', 'Foge'],
+                answer: 'Retruca tudo'
+            },
+            {
+                question: 'O que o Rian mais fala no dia a dia?',
+                options: ['Meu santo Deus', 'Seu rabo', 'Pprt', 'Meu ovo'],
+                answer: 'Meu santo Deus'
+            },
+            {
+                question: 'Por qual menina o Juan seria o gado supremo?',
+                options: ['Jisoo (BlackPink)', 'Jade Picon', 'Rose (BlackPink)', 'A sonhada branquela', 'All Options'],
+                answer: 'All Options'
+            },
+            {
+                question: 'Qual foi o emprego anterior do Juan?',
+                options: ['Marido da Rose', 'Est. Logística', 'Pobre de aluguel', 'Lixeiro'],
+                answer: 'Est. Logística'
+            },
+            {
+                question: 'Quem não resiste a uma cacheada?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Sanderson'
+            },
+            {
+                question: 'Quem não resiste a uma pretinha?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Rian'
+            },
+            {
+                question: 'Qual a banda preferida do Rian?',
+                options: ['Carreta Furacão', 'My First Story', 'Against the Current', 'One Ok Rock'],
+                answer: 'One Ok Rock'
+            },
+            {
+                question: 'Qual o estilo musical do Sandinho?',
+                options: ['Funkeiro', 'Eclético', 'Eletrônica', 'Rock'],
+                answer: 'Eclético'
+            },
+            {
+                question: 'Qual o nome mais comprometedor que o grupo já teve?',
+                options: ['Comedores de Casadas', 'Tarados da Playboy', 'Skies of Furacão', 'Carreta Fura o Cão'],
+                answer: 'Tarados da Playboy'
+            },
+            {
+                question: 'Qual o estilo musical do Tiago/Rian?',
+                options: ['Funk', 'Pagode', 'Sons do Rodrigo Faro', 'Rock'],
+                answer: 'Rock'
+            },
+            {
+                question: 'Qual a música preferida do Aimar?',
+                options: ['PinkVenom', 'I cant stop me', 'Queen of Hearts', 'Ready For Love'],
+                answer: 'Ready For Love'
+            },
+            {
+                question: 'De quem o Rian gosta?',
+                options: ['Da sua mãe', 'Mãe do Renan', 'Dani', 'Ingrid'],
+                answer: 'Da sua mãe'
+            },
+            {
+                question: 'Até onde o Sand iria por mulher?',
+                options: ['Transcender todo o físico', 'Confins do Universo', 'Confins da Terra', 'Inferno'],
+                answer: 'Transcender todo o físico'
+            },
+            {
+                question: 'Qual a palavra Tiago costuma falar antes de iniciar uma frase em áudio?',
+                options: ['Parceiro', 'Mano', 'Cara', 'Cucabeludo'],
+                answer: 'Parceiro'
+            },
+            {
+                question: 'Qual a diversão preferida do Rian?',
+                options: ['Perturbar Anão', 'Música', 'Videogame', 'Amigas (HMM)', 'Assistir Ultraman'],
+                answer: 'Música'
+            },
+            {
+                question: 'Qual o herói preferido do Rian?',
+                options: ['Spectreman', 'Spider-Man', 'Flash', 'Ultraman'],
+                answer: 'Spectreman'
+            },
+            {
+                question: 'O que deixa Juan mais desconfortável?',
+                options: ['Estresse', 'Discussões', 'Ser comido no argumento', 'Vergonha'],
+                answer: 'Discussões'
+            },
+            {
+                question: 'Qual é o bordão mais antigo do grupo?',
+                options: ['Se ficar p* é pior', 'Aceite caladah', 'Talento moreh', 'Dou biscoito, dou uma coisa'],
+                answer: 'Se ficar p* é pior'
+            },
+            {
+                question: 'O que Sand faz nas horas vagas?',
+                options: ['Anda Skate', 'Parkour', 'Desenrola garota', 'Ri', 'Todas essas'],
+                answer: 'Todas essas'
+            },
+            {
+                question: 'Quem já mandou a mídia mais longa (em minutos) do grupo?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Tiago'
+            },
+            {
+                question: 'Qual a data de batismo do Rian?',
+                options: ['11/03/2016', '13/03/2016', '12/03/2016', '15/03/2016'],
+                answer: '12/03/2016'
+            },
+            {
+                question: 'Quem é mais sentimental?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Juan'
+            },
+        ];
+
+        let currentQuestionNumber = 0; // Número da pergunta atual
+        let score = 0; // Pontuação do jogador
+
+        // Elementos HTML
+        const question = document.getElementById('question');
+        const options = document.getElementById('options');
+        const submitBtn = document.getElementById('submit-btn');
+        const restartBtn = document.getElementById('restart-btn');
+        const scoreDisplay = document.getElementById('score-display');
+        const errorDisplay = document.getElementById('error');
+
+        // Função para exibir uma pergunta
+        function showQuestion(questionObj) {
+            question.innerText = questionObj.question;
+            options.innerHTML = '';
+
+            questionObj.options.forEach(option => {
+                const button = document.createElement('button');
+                button.classList.add('btn');
+                button.innerText = option;
+                button.setAttribute('onClick', 'checkAnswer(this.innerText)');
+                options.appendChild(button);
+            });
+        }
+
+        // Função para exibir uma mensagem de feedback
+        function showMessage(message, type) {
+            errorDisplay.innerText = message;
+            errorDisplay.className = `error ${type}`;
+            errorDisplay.classList.remove('hidden');
+        }
+
+        // Função para verificar a resposta do jogador
+        function checkAnswer(answer) {
+            const currentQuestion = questions[currentQuestionNumber];
+
+            if (answer === currentQuestion.answer) {
+                score++;
+                scoreDisplay.innerText = score;
+                showMessage('Correto!', 'success');
+                const escolha =  '../midia/SnapSave.io - acerto mizeravi (128 kbps).mp3'
+                const audio = new Audio(escolha);
+                audio.play();
+            } else {
+                showMessage('Incorreto!', 'error');
+                const escolha =  '../midia/faustao-errou.mp3'
+                const audio = new Audio(escolha);
+                audio.play();
+            }
+
+            currentQuestionNumber++;
+            if (currentQuestionNumber < questions.length) {
+                showQuestion(questions[currentQuestionNumber]);
+            } else {
+                showMessage(`Você acertou ${score} de ${questions.length} perguntas!`, 'info');
+                question.classList.add('hidden');
+                options.classList.add('hidden');
+                submitBtn.classList.add('hidden');
+                restartBtn.classList.remove('hidden');
+            }
+        }
+
+        // Função para enviar a resposta do jogador
+        function submitAnswer() {
+            const selectedOption = options.querySelector('.btn.selected');
+
+            if (selectedOption) {
+                checkAnswer(selectedOption.innerText);
+            } else {
+                showMessage('Selecione uma opção!', 'error');
+            }
+        }
+
+        // Função para reiniciar o jogo
+        function restartGame() {
+            currentQuestionNumber = 0;
+            score = 0;
+            scoreDisplay.innerText = score;
+            showQuestion(questions[currentQuestionNumber]);
+            restartBtn.classList.add('hidden');
+            question.classList.remove('hidden');
+            options.classList.remove('hidden');
+            submitBtn.classList.remove('hidden');
+            if(score === 30){
+                const escolha =  '../midia/SnapSave.io - efeitos sonoros do programa do Ratinho (super estourado) (320 kbps).mp3'
+                const audio = new Audio(escolha);
+                audio.play();
+            }
+        }
+
+        // Início do jogo
+        showQuestion(questions[currentQuestionNumber]);
+    </script>
+</body>
+
+</html>

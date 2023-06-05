@@ -1,120 +1,201 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Jogo da Velha</title>
-    <style type="text/css">
-        *{
-            margin: 0px;
-            padding: 0px;
-            box-sizing: border-box;
-            font-family: cursive;
-            background-color: black;
-            color: white;
+    <title>Tic Tac Toe</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
         }
-        body{
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        main{
-            display: flex;
-            flex-direction: column;
-            gap: 5px;
-        }
-        h1{
+
+        h1 {
             text-align: center;
         }
-        hr{
-            font-weight: bold;
-            height: 3px;
-            background: black;
+
+        #symbol-form {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 50px;
+        }
+
+        #symbol-form label {
+            font-size: 20px;
             margin-bottom: 10px;
         }
-        .game{
-            display: grid;
-            grid-template-columns: 1fr 1fr 1fr;
-            color: rgb(0, 0, 0);
+
+        #symbol-form input {
+            font-size: 20px;
+            padding: 5px;
+            text-align: center;
+            width: 50px;
+            margin-bottom: 20px;
         }
-        .game button{
+
+        #board {
+            display: flex;
+            flex-wrap: wrap;
+            width: 300px;
+            margin: 50px auto 0;
+        }
+
+        .square {
             width: 100px;
             height: 100px;
-            margin: 5px;
+            border: 2px solid black;
+            box-sizing: border-box;
+            font-size: 60px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             cursor: pointer;
-            font-size: 50px;
-            background: white;
-            color: rgb(0, 0, 0);
+        }
+
+        .square:hover {
+            background-color: lightgray;
+        }
+
+        #game-over {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 24px;
         }
     </style>
 </head>
+
 <body>
-    <main>
-        <h1>JOGO DA VELHA</h1>
-        <hr />
-        <div class="game">
-            <button data-i="1"></button>
-            <button data-i="2"></button>
-            <button data-i="3"></button>
-            <button data-i="4"></button>
-            <button data-i="5"></button>
-            <button data-i="6"></button>
-            <button data-i="7"></button>
-            <button data-i="8"></button>
-            <button data-i="9"></button>
-        </div>
-        <h2 class="CurrentPlayer"></h2>
-    </main>
+    <h1>Jogo da Velha</h1>
 
-    <script>
-        const CurrentPlayer = document.querySelector(".CurrentPlayer");
-        let selected;
-        let player = "X";
-        let positions = [
-            [1, 2, 3], [4, 5, 6], [7, 8, 9] ,[1, 5, 9], [1, 4, 7], [2, 5, 8], [3, 6, 9], [3, 5, 7]
-        ];
-        function init(){
-            selected = [];
-            CurrentPlayer.innerHTML = `JOGADOR DA VEZ: ${player}`
-            document.querySelectorAll(".game button").forEach((item) => {
-                item.innerHTML = "";
-                item.addEventListener("click", newMove);
-            });
-        }
-        init();
-        function newMove(e){
-            const index = e.target.getAttribute("data-i");
-            e.target.innerHTML = player;
-            e.target.removeEventListener("click", newMove);
-            selected[index] = player;
+    <form id="symbol-form">
+        <label for="player1-symbol">Player 1 Symbol:</label>
+        <input type="text" id="player1-symbol" name="player1-symbol" value="X" maxlength="1">
 
-            setTimeout(() => {
-                check();
-            }, [100]);
-            player = player === "X" ? "O" : "X";
-            CurrentPlayer.innerHTML = `JOGADOR DA VEZ: ${player}`;
+        <label for="player2-symbol">Player 2 Symbol:</label>
+        <input type="text" id="player2-symbol" name="player2-symbol" value="O" maxlength="1">
+
+        <button type="submit">Start Game</button>
+    </form>
+
+    <div id="board"></div>
+    <div id="game-over"></div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
+<script>
+    const symbolForm = document.getElementById('symbol-form');
+    const board = document.getElementById('board');
+    const gameOverMessage = document.getElementById('game-over');
+
+    let currentPlayer;
+    let playerSymbols;
+
+    symbolForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const player1Symbol = document.getElementById('player1-symbol').value;
+        const player2Symbol = document.getElementById('player2-symbol').value;
+
+        startGame(player1Symbol, player2Symbol);
+    });
+
+    function startGame(player1Symbol, player2Symbol) {
+        currentPlayer = player1Symbol;
+        playerSymbols = [player1Symbol, player2Symbol];
+
+        board.innerHTML = '';
+
+        for (let i = 0; i < 9; i++) {
+            const square = document.createElement('div');
+            square.classList.add('square');
+            square.addEventListener('click', () => handleClick(square, i));
+            board.appendChild(square);
         }
-        function check(){
-            let playerLastMove = player === "X" ? "O" : "X";
-            const items = selected
-              .map((item, i) => [item, i])
-              .filter((item) => item[0] === playerLastMove)
-              .map((item) => item[1]);
-            for(pos of positions){
-                if(pos.every((item) => items.includes(item))){
-                    alert("O JOGADOR " + playerLastMove + " GANHOU!");
-                    init();
-                    return;
+
+        gameOverMessage.textContent = '';
+
+        board.style.pointerEvents = 'auto';
+    }
+
+    function handleClick(square, index) {
+        if (!square.textContent) {
+            square.textContent = currentPlayer;
+            square.style.color = currentPlayer === playerSymbols[0] ? 'red' : 'blue';
+
+            if (checkWinner()) {
+                gameOver(currentPlayer + ' wins!');
+
+            } else if (checkTie()) {
+                gameOver('Tie game!');
+            } else {
+                currentPlayer = currentPlayer === playerSymbols[0] ? playerSymbols[1] : playerSymbols[0];
+                if (currentPlayer === playerSymbols[1]) {
+                    makeAIMove();
                 }
             }
-            if(selected.filter((item) => item).length === 9){
-                alert("DEU EMPATE!");
-                init();
-                return;
+        }
+    }
+
+    function checkWinner() {
+        const squares = document.getElementsByClassName('square');
+        const winConditions = [
+            [0, 1, 2], [3, 4, 5], [6, 7, 8], // rows
+            [0, 3, 6], [1, 4, 7], [2, 5, 8], // columns
+            [0, 4, 8], [2, 4, 6] // diagonals
+        ];
+
+        for (let i = 0; i < winConditions.length; i++) {
+            const [a, b, c] = winConditions[i];
+            if (squares[a].textContent &&
+                squares[a].textContent === squares[b].textContent &&
+                squares[a].textContent === squares[c].textContent) {
+                return true;
             }
         }
-    </script>
+
+        return false;
+    }
+
+    function checkTie() {
+        const squares = document.getElementsByClassName('square');
+
+        for (let i = 0; i < squares.length; i++) {
+            if (!squares[i].textContent) {
+                return false;
+            }
+        }
+
+        return true;
+    }
+
+    function gameOver(message) {
+        board.style.pointerEvents = 'none';
+        gameOverMessage.textContent = message;
+    }
+
+    function makeAIMove() {
+        const squares = document.getElementsByClassName('square');
+        const availableSquares = [];
+
+        for (let i = 0; i < squares.length; i++) {
+            if (!squares[i].textContent) {
+                availableSquares.push(squares[i]);
+            }
+        }
+
+        const randomIndex = Math.floor(Math.random() * availableSquares.length);
+        const chosenSquare = availableSquares[randomIndex];
+
+        setTimeout(() => {
+            handleClick(chosenSquare);
+        }, 1000);
+    }
+</script>
 </body>
+
 </html>
