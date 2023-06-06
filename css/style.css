@@ -1,5 +1,7 @@
 @charset "UTF-8";
 html, body{
+    text-align: center;
+    align-items: center;
     padding: 0px;
     margin: 0px;
     font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
@@ -39,15 +41,19 @@ span#burger:hover{
     cursor: pointer;
 }
 menu{
+    text-align: center;
     display: none;
 }
 menu > ul{
+    text-align: center;
     list-style-type: none;
 }
 menu > ul > li{
     width: 80%;
+    text-align: center;
 }
 menu > ul > li > a{
+    text-align: center;
     display: block;
     padding: 10px;
     text-decoration: none;
@@ -70,4 +76,5 @@ footer{
     background-color: black;
     color: white;
     font-weight: bolder;
+    text-align: center;
 }

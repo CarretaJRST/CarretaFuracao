@@ -269,6 +269,21 @@
                 options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
                 answer: 'Juan'
             },
+            {
+                question: 'Quem é mais palhaço?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Tiago'
+            },
+            {
+                question: 'Quem é o mais lerdo?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Rian'
+            },
+            {
+                question: 'Quem é o mais bananão?',
+                options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+                answer: 'Sanderson'
+            }
         ];
 
         let currentQuestionNumber = 0; // Número da pergunta atual
@@ -314,6 +329,11 @@
                 const escolha =  '../midia/SnapSave.io - acerto mizeravi (128 kbps).mp3'
                 const audio = new Audio(escolha);
                 audio.play();
+                if(score == 33){
+                    const escolha =  '../midia/SnapSave.io - efeitos sonoros do programa do Ratinho (super estourado) (320 kbps).mp3'
+                    const audio = new Audio(escolha);
+                    audio.play();
+                }
             } else {
                 showMessage('Incorreto!', 'error');
                 const escolha =  '../midia/faustao-errou.mp3'
@@ -354,11 +374,6 @@
             question.classList.remove('hidden');
             options.classList.remove('hidden');
             submitBtn.classList.remove('hidden');
-            if(score === 30){
-                const escolha =  '../midia/SnapSave.io - efeitos sonoros do programa do Ratinho (super estourado) (320 kbps).mp3'
-                const audio = new Audio(escolha);
-                audio.play();
-            }
         }
 
         // Início do jogo
