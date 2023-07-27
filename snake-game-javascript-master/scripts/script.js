@@ -111,4 +111,11 @@ function restartGame() {
     startGame();
 }
 
+function clickM() {
+    const escolha = ['../midia/SnapSave.io - [EFEITO SONORO] DEMAIS RODRIGO FARO (320 kbps).mp3', '../midia/SnapSave.io - aow potencia   0001 (320 kbps).mp3', '../midia/SnapSave.io - Cavalo vinhetas (320 kbps).mp3', '../midia/SnapSave.io - Dança Gatinho, Dança Efeito Sonoro (320 kbps).mp3' , '../midia/SnapSave.io - Esse é meu patrão - (áudio) (320 kbps).mp3', '../midia/SnapSave.io - Programa do Ratinho - SFX _Ratinhooo_ original (320 kbps).mp3', '../midia/SnapSave.io - Uepa Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Ui - Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - vinheta_efeito sonoro - xiiii (Rodrigo Faro) (320 kbps).mp3', '../midia/SnapSave.io - Ele gosta - Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Irra! (efeito de som) (320 kbps).mp3', '../midia/SnapSave.io - que isso meu filho calma (320 kbps).mp3', '../midia/SnapSave.io - Som de PARE Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Tarzan - Free Sound Effect (320 kbps).mp3']
+    const aleatorio = Math.floor(Math.random() * (13 - 0) + 0);           
+    const audio = new Audio(escolha[aleatorio])
+    audio.play();
+}
+
 startGame(); // Inicia o jogo inicialmente
