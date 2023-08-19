@@ -16,18 +16,23 @@ function handleMouseClick(event) {
     const clickY = event.clientY - canvas.offsetTop;
     const snakeHeadX = snake[0].x;
     const snakeHeadY = snake[0].y;
-
+  
     const dx = clickX - snakeHeadX;
     const dy = clickY - snakeHeadY;
-
+  
     if (Math.abs(dx) > Math.abs(dy)) {
+      if (direction.x === 0) { // Impede que a cobra volte na direção oposta horizontal
         direction.x = dx > 0 ? box : -box;
         direction.y = 0;
+      }
     } else {
+      if (direction.y === 0) { // Impede que a cobra volte na direção oposta vertical
         direction.x = 0;
         direction.y = dy > 0 ? box : -box;
+      }
     }
-}
+  }
+  
 
 function generateFood() {
     food.x = Math.floor(Math.random() * columns) * box;
@@ -42,7 +47,7 @@ function drawFood() {
 function drawSnake() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
     for (let i = 0; i < snake.length; i++) {
-        ctx.fillStyle = (i === 0) ? 'green' : 'white';
+        ctx.fillStyle = (i === 0) ? 'green' : 'yellow';
         ctx.fillRect(snake[i].x, snake[i].y, box, box);
         ctx.strokeStyle = 'black';
         ctx.strokeRect(snake[i].x, snake[i].y, box, box);
@@ -83,17 +88,23 @@ function update() {
     // Verifica se a cobra alcançou a fruta
     if (snakeX === food.x && snakeY === food.y) {
         generateFood();
+        score++;
     } else {
         // Remove o último elemento da cobra se não comeu a fruta
         snake.pop();
     }
 
     if (checkCollision()) {
+        clearInterval(game);
+        game = null;
+        document.getElementById('restartButton').style.display = 'block';
+        alert('Game Over! Você bateu na própria cauda.');
         return;
     }
 
     drawSnake();
     drawFood();
+
 }
 
 function startGame() {
@@ -112,8 +123,8 @@ function restartGame() {
 }
 
 function clickM() {
-    const escolha = ['../midia/SnapSave.io - [EFEITO SONORO] DEMAIS RODRIGO FARO (320 kbps).mp3', '../midia/SnapSave.io - aow potencia   0001 (320 kbps).mp3', '../midia/SnapSave.io - Cavalo vinhetas (320 kbps).mp3', '../midia/SnapSave.io - Dança Gatinho, Dança Efeito Sonoro (320 kbps).mp3' , '../midia/SnapSave.io - Esse é meu patrão - (áudio) (320 kbps).mp3', '../midia/SnapSave.io - Programa do Ratinho - SFX _Ratinhooo_ original (320 kbps).mp3', '../midia/SnapSave.io - Uepa Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Ui - Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - vinheta_efeito sonoro - xiiii (Rodrigo Faro) (320 kbps).mp3', '../midia/SnapSave.io - Ele gosta - Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Irra! (efeito de som) (320 kbps).mp3', '../midia/SnapSave.io - que isso meu filho calma (320 kbps).mp3', '../midia/SnapSave.io - Som de PARE Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Tarzan - Free Sound Effect (320 kbps).mp3']
-    const aleatorio = Math.floor(Math.random() * (13 - 0) + 0);           
+    const escolha = ['../midia/SnapSave.io - [EFEITO SONORO] DEMAIS RODRIGO FARO (320 kbps).mp3', '../midia/SnapSave.io - Cavalo vinhetas (320 kbps).mp3', '../midia/SnapSave.io - Dança Gatinho, Dança Efeito Sonoro (320 kbps).mp3' , '../midia/SnapSave.io - Esse é meu patrão - (áudio) (320 kbps).mp3', '../midia/SnapSave.io - Programa do Ratinho - SFX _Ratinhooo_ original (320 kbps).mp3', '../midia/SnapSave.io - Uepa Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Ui - Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - vinheta_efeito sonoro - xiiii (Rodrigo Faro) (320 kbps).mp3', '../midia/SnapSave.io - Ele gosta - Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Irra! (efeito de som) (320 kbps).mp3', '../midia/SnapSave.io - que isso meu filho calma (320 kbps).mp3', '../midia/SnapSave.io - Som de PARE Efeito Sonoro (320 kbps).mp3', '../midia/SnapSave.io - Tarzan - Free Sound Effect (320 kbps).mp3', '../midia/X2Download.app - audio _AI_ vinheta do programa do rodrigo faro (320 kbps).mp3', '../midia/X2Download.app - [EFEITO SONORO] AAAAAAI AI AAAAI AAAAAAI RODRIGO FARO (320 kbps).mp3', '../midia/X2Download.app - É BRINCADEIRA HEIN - RODRIGO FARO - Sound Effect (HD) (320 kbps).mp3', '../midia/X2Download.app - audio _AI_ vinheta do programa do rodrigo faro (320 kbps).mp3', '../midia/X2Download.app - audio _AI_ vinheta do programa do rodrigo faro (320 kbps).mp3', '../midia/X2Download.app - audio _AI_ vinheta do programa do rodrigo faro (320 kbps).mp3', '../midia/X2Download.app - audio _AI_ vinheta do programa do rodrigo faro (320 kbps).mp3', '../midia/X2Download.app - audio _AI_ vinheta do programa do rodrigo faro (320 kbps).mp3']
+    const aleatorio = Math.floor(Math.random() * (20 - 0) + 0);           
     const audio = new Audio(escolha[aleatorio])
     audio.play();
 }
