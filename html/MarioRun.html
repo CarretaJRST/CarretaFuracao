@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarioRun</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #01012c;
+            color: white;
+            font-weight: bolder;
+        }
+
+        .game {
+            display: none; /* Esconder o jogo no início */
+            width: 450px;
+            height: 500px;
+            background-color: #040139;
+            background-image: url('/Imagens/Media_231011_145754.gif');
+            background-position: center bottom;
+            border: 2px solid #000;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        .dino {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            bottom: 0;
+            transform: scale(1.7);
+        }
+
+        .obstacle {
+            width: 100px;
+            height: 100px;
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+        }
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+        }
+        .desc{
+            text-align: center;
+            font-size: 1.3em;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="desc"><p>Mário tem um encontro com a Princesa Peach hoje a noite no parque. Mas um bando de "Piranha Plants" estão em seu caminho para impedi-lo de chegar a tempo, você poderá ajudá-lo?</p></div>
+    <div class="desc"><button onclick="startGame()">Iniciar Jogo</button></div>
+    <div class="game">
+        <div style="color:white; text-align:center"><h2>Pontuação</h2></div>
+        <div class="score" style="color: white;"><br>0</div>
+        <img src="/Imagens/Super Mario Run by T-Free on DeviantArt.gif" class="dino">
+        <img src="../Imagens/plant.gif" class="obstacle" />
+    </div>
+    <div class="desc">
+        <img src="/Imagens/R.gif" alt="">
+    </div>
+    <script type="text/javascript">
+        const audio = new Audio('../midia/SnapInsta.io - Michael Jackson -  Beat It [Moonwalker Sega Mega Drive] [HQ] (128 kbps) (1).mp3')
+        audio.play()
+        let gameStarted = false;
+        function startGame() {
+            audio.play();
+            if (!gameStarted) {
+                document.querySelector('.game').style.display = 'block'; // Mostrar o jogo
+                gameStarted = true;
+                const game = document.querySelector('.game');
+                const dino = document.querySelector('.dino');
+                const obstacle = document.querySelector('.obstacle');
+                const scoreDisplay = document.querySelector('.score');
+                let isJumping = false;
+                let gravity = 0.9;
+                let isGameOver = false;
+                let position = 0;
+                let score = 0;
+                let obstacleSpeed = 10; // Velocidade inicial do obstáculo
+            
+                function jump() {
+                    if (!isJumping) {
+                        isJumping = true;
+                        let upInterval = setInterval(() => {
+                            if (position >= 150) {
+                                clearInterval(upInterval);
+                                let downInterval = setInterval(() => {
+                                    if (position <= 0) {
+                                        clearInterval(downInterval);
+                                        isJumping = false;
+                                    } else {
+                                        position -= 20;
+                                        dino.style.bottom = position + 'px';
+                                    }
+                                }, 20);
+                            } else {
+                                position += 20;
+                                dino.style.bottom = position + 'px';
+                            }
+                        }, 20);
+                    }
+                }
+            
+                document.addEventListener('click', jump);
+            
+                function generateObstacle() {
+                    if (isGameOver) return;
+            
+                    let obstaclePosition = 600;
+                    obstacle.style.left = obstaclePosition + 'px';
+            
+                    function moveObstacle() {
+                        let leftInterval = setInterval(() => {
+                            if (obstaclePosition < -20) {
+                                clearInterval(leftInterval);
+                                generateObstacle(); // Gerar um novo obstáculo
+                            } else if (obstaclePosition > 0 && obstaclePosition < 50 && position < 50) {
+                                clearInterval(leftInterval);
+                                isGameOver = true;
+                                window.alert('Fim de Jogo');
+                                document.body.innerHTML = '<h1 class="game-over">Fim de Jogo</h1>';
+                            } else {
+                                obstaclePosition -= obstacleSpeed;
+                                obstacle.style.left = obstaclePosition + 'px';
+                                if (obstaclePosition < -20) {
+                                    score += 10;
+                                    scoreDisplay.innerText = score;
+                                    if(score >= 1000){
+                                        isGameOver = true;
+                                        window.alert('Você venceu');
+                                        document.body.innerHTML = '<h1>Você conseguiu, parabéns!</h1><img src="/Imagens/vaidarnamoro.jpg" alt="" style="width:100%; height:100%;">';
+                                    }
+                                }
+                            }
+                        }, 20);
+                    }
+            
+                    moveObstacle();
+                }
+            
+                generateObstacle();
+            
+                setInterval(() => {
+                    // Aumente a velocidade do obstáculo a cada 20 segundos
+                    obstacleSpeed += 2;
+                }, 20000);
+            }
+        }
+    </script>
+</body>
+</html>
