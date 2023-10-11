@@ -50,43 +50,6 @@
                 <p><h2>Dia 30/09/2023 - Sand se batizooouuuuuu!!!</h2></p>
             </article>
         </section>
-        <section style="text-align: center;">
-            <br><br>
-            <h2>PERGUNTA IMPORTANTE</h2>
-            <h2>Com Quem o Rian Vai Casar? (Clique no nome de uma delas para responder)</h2>
-            <p style="font-weight: bolder;"><span onclick="ingrid()" id="res">Ingrid</span><span onclick="bb()" id="res">Dani</span><span onclick="lari()" id="res">Larissa</span><span onclick="outra()" id="res">Outra</span></p>
-        </section>
-        <section id="dani">
-            <h1>Resposta do Rian:</h1>
-            <span style="font-weight: bolder; color: white" id="rd">
-                <p>Olha aqui seu palhaço desgraçado, não é porque a Dani é minha best e eu trato ela como se fosse minha (quase) namorada que tu vai ficar nessa palhaçada não, valeu?</p>
-                <p>Fica de graça pra tu ver se eu não te mato. "Ain, ele abraça, beija, baba ela toda", DANE-SE, euhein. Bando de pobre miserável, pode nem ter uma amiga carinhosa mais, pode nem ficar ansioso de encontrar a menina mais, pode nem dizer que ama, elogiar e etc. Inferno</p>
-                <p>E nem venha falar de melosidade não, cacete. Pow, tu quer que eu fique de melosidade com quem? Com o Aimar? "Uiui, vou pegar na mão do Aimar e vou chamar ele de amor."</p>
-                <p>VÁ TE LASCAR SEU PALHAÇO!</p>
-                <p>E sim, Dani é meu pedacinho de cuscuz, o môzão da minha vida... Mas ela não é minha prometida, e nunca nos paqueramos, seus miseravis!</p>
-                <p>Eu vou ir na tua casa te dar uma surra, vai ver só!</p>
-            </span>
-        </section>
-        <section id="pret">
-            <span style="font-weight: bolder; color: white" id="rd">
-            <h1>Resposta do Rian: </h1>
-            <p>Mano, olha só, tu para de sacanagem tá? Não é porque ela é pretinha, do jeitinho que eu gosto, pioneira, sorriso lindo, super maneira e o caramba à quatro, que eu fico deitado na cama pensando nela ou me imaginando com ela não seu palhaço. TU PARA COM ESSA MERDA QUE EU VOU INVADIR TUA CASA COM UM PORRETE MISERÁVEL! Euhein.</p>
-            <p>É o que eu falo, não posso nem ter uma amiga mais que tudo agora é pegação. Não posso nem mais fortalecer a amizade com ela nem nada que eu já sou taxado de pegador imoral, palhaçada. Ela é 10 anos mais velha, se manca rapaix!</p> </span>
-        </section>
-        <section id="larissa">
-            <span style="font-weight: bolder; color: white" id="rd">
-            <h1>Resposta do Rian:</h1>
-            <p>Pior que talvez seja. Ela é linda, gostosa, cacheada, aquela morena dos sonhos, torce pro Flu e etc, o ruim é ela MORAR DO OUTRO LADO DE BELFORD ROXO CARA!</p>
-            <p>Só teria que enfrentar TIROTEIO, LAMA, ENCHENTE, BURACOS NA PISTA, BANDIDOS, MILÍCIA, POLÍCIA, CALOR, POEIRA, FRIO, talvez a FAIXA DE GAZA SEJA MAIS FÁCIL KKKKKKKKK</p>
-            <p>Mas não nego que eu quero KKKKKKKKKKKKKKK Depende mais dela do que de mim.</p>
-        </span>
-        </section>
-        <section id="outr">
-            <h1>Resposta do Rian e Juan: </h1>
-            <span style="font-weight: bolder; color: white" id="rd">
-                <p>Talvez seja com outra mesmo. Mas só o tempo dirá.</p>
-            </span>
-        </section>
     </main>
     <script>
         function clickM() {
@@ -94,58 +57,6 @@
             const aleatorio = Math.floor(Math.random() * (13 - 0) + 0);           
             const audio = new Audio(escolha[aleatorio])
             audio.play();
-        }
-        function bb(){
-            const audio = new Audio('../midia/SnapSave.io - Uepa Efeito Sonoro (320 kbps).mp3')
-            audio.play();
-            if(dani.style.display == 'block'){
-                dani.style.display = 'none';
-        }
-            else{
-                dani.style.display = 'block'
-                pret.style.display = 'none'
-                larissa.style.display = 'none'
-                outr.style.display = 'none'
-        }
-        }
-        function ingrid(){
-            const audio = new Audio('../midia/SnapSave.io - que isso meu filho calma (320 kbps).mp3')
-            audio.play();
-            if(pret.style.display == 'block'){
-                pret.style.display = 'none';
-        }
-            else{
-                dani.style.display = 'none'
-                pret.style.display = 'block'
-                larissa.style.display = 'none'
-                outr.style.display = 'none'
-        }
-        }
-        function lari(){
-            const audio = new Audio('../midia/SnapSave.io - Ele gosta - Efeito Sonoro (320 kbps).mp3')
-            audio.play();
-            if(larissa.style.display == 'block'){
-                larissa.style.display = 'none';
-        }
-            else{
-                dani.style.display = 'none'
-                pret.style.display = 'none'
-                larissa.style.display = 'block'
-                outr.style.display = 'none'
-        }
-        }
-        function outra(){
-            const audio = new Audio('../midia/SnapSave.io - Tarzan - Free Sound Effect (320 kbps).mp3')
-            audio.play();
-            if(outr.style.display == 'block'){
-                outr.style.display = 'none';
-        }
-            else{
-                dani.style.display = 'none'
-                pret.style.display = 'none'
-                larissa.style.display = 'none'
-                outr.style.display = 'block'
-        }
         }
     </script>
 </body>
