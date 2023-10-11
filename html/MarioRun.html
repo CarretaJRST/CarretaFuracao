@@ -134,7 +134,7 @@
                                 if (obstaclePosition < -20) {
                                     score += 10;
                                     scoreDisplay.innerText = score;
-                                    if(score >= 1000){
+                                    if(score >= 900){
                                         isGameOver = true;
                                         window.alert('Você venceu');
                                         document.body.innerHTML = '<h1>Você conseguiu, parabéns!</h1><img src="../Imagens/vaidarnamoro.jpg" alt="" style="width:100%; height:100%;">';
@@ -150,9 +150,9 @@
                 generateObstacle();
             
                 setInterval(() => {
-                    // Aumente a velocidade do obstáculo a cada 20 segundos
+                    // Aumente a velocidade do obstáculo a cada x segundos
                     obstacleSpeed += 2;
-                }, 20000);
+                }, 100000);
             }
         }
     </script>
