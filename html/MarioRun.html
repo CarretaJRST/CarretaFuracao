@@ -15,8 +15,9 @@
         }
 
         .game {
-            display: none; /* Esconder o jogo no início */
-            width: 450px;
+            display: none;
+            /* Esconder o jogo no início */
+            width: 400px;
             height: 500px;
             background-color: #040139;
             background-image: url('../Imagens/Media_231011_145754.gif');
@@ -25,6 +26,15 @@
             position: relative;
             margin: 0 auto;
             overflow: hidden;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(0, 58, 11);
+            z-index: 9;
+            border-radius: 10px;
+            color: white;
         }
 
         .dino {
@@ -42,39 +52,76 @@
             bottom: 0;
             left: 100%;
         }
+
         .score {
             position: absolute;
             top: 10px;
             right: 10px;
             font-size: 24px;
         }
-        .desc{
+
+        .desc,
+        .tutorial {
             text-align: center;
             font-size: 1.3em;
+        }
+
+        .audi {
+            text-align: center;
+        }
+        .titulo{
+            text-align: center;
+            color:  #c80000;;
         }
     </style>
 </head>
 
 <body>
-    <div class="desc"><p>Mário tem um encontro com a Princesa Peach hoje a noite no parque. Mas um bando de "Piranha Plants" estão em seu caminho para impedi-lo de chegar a tempo, você poderá ajudá-lo?</p></div>
-    <div class="desc"><button onclick="startGame()">Iniciar Jogo</button></div>
+    <h1 class="titulo">SUPER MARIO <span style="color: white;">-</span> <span style="color: rgb(62, 167, 65)">Plants of Trouble</h1></span>
+    <div class="desc">
+        <p>Mário tem um encontro com a Princesa Peach hoje a noite no parque. Mas um bando de "Piranha Plants" estão em
+            seu caminho para impedi-lo de chegar a tempo, você poderá ajudá-lo?</p>
+    </div>
+    <div class="tutorial">
+        <h1 style="color: #06fefe;">Como Jogar?</h1>
+        <p>Toque na tela (ou clique no botão esquerdo do mouse) para pular as plantas.</p>
+        <p>A música tema está disponível pra reprodução e download abaixo. Quando o jogo acabar, recarregue a página
+            para reiniciar o game.</p>
+        <p>Se quiser que a música volte a tocar, só apertar o play nela. O jogo acaba ao conseguir 1250 pontos. Tenha um bom jogo rapaix!</p>
+    </div>
     <div class="game">
-        <div style="color:white; text-align:center"><h2>Pontuação</h2></div>
+        <div style="color:white; text-align:center">
+            <h2>Pontuação</h2>
+        </div>
         <div class="score" style="color: white;"><br>0</div>
         <img src="../Imagens/Super Mario Run by T-Free on DeviantArt.gif" class="dino">
         <img src="../Imagens/plant.gif" class="obstacle" />
     </div>
+    <div class="audi">
+        <audio preload="metadata" autoplay controls loop>
+            <source
+                src="../midia/SnapInsta.io - Michael Jackson -  Beat It [Moonwalker Sega Mega Drive] [HQ] (128 kbps) (1).mp3"
+                type="audio/mpeg">
+            <p>Infelizmente seu navegador não consegue reproduzir o arquivo. Clique para baixá-lo: <a
+                    href="../midia/SnapInsta.io - Michael Jackson -  Beat It [Moonwalker Sega Mega Drive] [HQ] (128 kbps) (1).mp3"></a>
+                AQUI!!!</p>
+        </audio>
+    </div>
+    <br><br>
+    <div class="desc"><button onclick="startGame()">Iniciar Jogo</button></div>
     <div class="desc">
-        <img src="../Imagens/R.gif" alt="">
+        <img src="../Imagens/R.gif" alt="" class="dance">
     </div>
     <script type="text/javascript">
-        const audio = new Audio('../midia/SnapInsta.io - Michael Jackson -  Beat It [Moonwalker Sega Mega Drive] [HQ] (128 kbps) (1).mp3')
-        audio.play()
         let gameStarted = false;
         function startGame() {
-            audio.play();
             if (!gameStarted) {
                 document.querySelector('.game').style.display = 'block'; // Mostrar o jogo
+                document.querySelector('.audi').style.display = 'none';
+                document.querySelector('.desc').style.display = 'none';
+                document.querySelector('button').style.display = 'none';
+                document.querySelector('.tutorial').style.display = 'none';
+                document.querySelector('.dance').style.display = 'none';
                 gameStarted = true;
                 const game = document.querySelector('.game');
                 const dino = document.querySelector('.dino');
@@ -85,8 +132,7 @@
                 let isGameOver = false;
                 let position = 0;
                 let score = 0;
-                let obstacleSpeed = 10; // Velocidade inicial do obstáculo
-            
+                let obstacleSpeed = 4; // Velocidade inicial do obstáculo
                 function jump() {
                     if (!isJumping) {
                         isJumping = true;
@@ -98,27 +144,28 @@
                                         clearInterval(downInterval);
                                         isJumping = false;
                                     } else {
-                                        position -= 20;
+                                        position -= 6;
                                         dino.style.bottom = position + 'px';
                                     }
                                 }, 20);
                             } else {
-                                position += 20;
+                                position += 9;
                                 dino.style.bottom = position + 'px';
                             }
                         }, 20);
                     }
                 }
-            
+
                 document.addEventListener('click', jump);
-            
+
                 function generateObstacle() {
                     if (isGameOver) return;
-            
+
                     let obstaclePosition = 600;
                     obstacle.style.left = obstaclePosition + 'px';
-            
+
                     function moveObstacle() {
+                        score += 1;
                         let leftInterval = setInterval(() => {
                             if (obstaclePosition < -20) {
                                 clearInterval(leftInterval);
@@ -134,7 +181,7 @@
                                 if (obstaclePosition < -20) {
                                     score += 10;
                                     scoreDisplay.innerText = score;
-                                    if(score >= 900){
+                                    if (score >= 1250) {
                                         isGameOver = true;
                                         window.alert('Você venceu');
                                         document.body.innerHTML = '<h1>Você conseguiu, parabéns!</h1><img src="../Imagens/vaidarnamoro.jpg" alt="" style="width:100%; height:100%;">';
@@ -143,18 +190,17 @@
                             }
                         }, 20);
                     }
-            
+
                     moveObstacle();
                 }
-            
                 generateObstacle();
-            
                 setInterval(() => {
                     // Aumente a velocidade do obstáculo a cada x segundos
-                    obstacleSpeed += 2;
-                }, 100000);
+                    obstacleSpeed += 1;
+                }, 60000);
             }
         }
     </script>
 </body>
+
 </html>
