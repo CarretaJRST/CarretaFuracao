@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MarioRun</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #01012c;
+            color: white;
+            font-weight: bolder;
+        }
+
+        .game {
+            display: none;
+            width: 400px;
+            height: 500px;
+            background-color: #040139;
+            background-image: url('../Imagens/Media_231011_145754.gif');
+            background-position: center bottom;
+            border: 2px solid #000;
+            position: relative;
+            margin: 0 auto;
+            overflow: hidden;
+        }
+
+        button {
+            width: 100px;
+            height: 50px;
+            background-color: rgb(0, 58, 11);
+            z-index: 9;
+            border-radius: 10px;
+            color: white;
+        }
+
+        .dino {
+            width: 150px;
+            height: 150px;
+            position: absolute;
+            bottom: 0;
+            transform: scale(1.7);
+        }
+
+        .obstacle {
+            width: 80px;
+            height: 100px;
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+        }
+
+        .score {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 24px;
+        }
+
+        .desc,
+        .tutorial {
+            text-align: center;
+            font-size: 1.3em;
+        }
+
+        .audi {
+            text-align: center;
+        }
+
+        .titulo {
+            text-align: center;
+            color: #c80000;
+        }
+
+        .coin {
+            width: 25px;
+            height: 60px;
+            position: absolute;
+            bottom: 0;
+            left: 100%;
+        }
+    </style>
+</head>
+
+<body>
+    <h1 class="titulo">SUPER MARIO <span style="color: white;">-</span> <span style="color: rgb(62, 167, 65)">Plants of
+            Trouble</span></h1>
+    <div class="desc">
+        <p>Mário tem um encontro com a Princesa Peach hoje à noite no parque. Mas um bando de "Piranha Plants" estão em
+            seu caminho para impedi-lo de chegar a tempo, você poderá ajudá-lo?</p>
+    </div>
+    <div class="tutorial">
+        <h1 style="color: #06fefe;">Como Jogar?</h1>
+        <p>Toque na tela (ou clique no botão esquerdo do mouse) para pular as plantas.</p>
+        <p>A música tema está disponível para reprodução e download abaixo. Quando o jogo acabar, recarregue a página
+            para reiniciar o game.</p>
+        <p>Se quiser que a música volte a tocar, só apertar o play nela. O jogo acaba ao conseguir 1250 pontos. Tenha um
+            bom jogo!</p>
+    </div>
+    <div class="game">
+        <div style="color:white; text-align:center">
+            <h2>Pontuação</h2>
+        </div>
+        <div class="score" style="color: white;">0</div>
+        <img src="../Imagens/Super Mario Run by T-Free on DeviantArt.gif" class="dino">
+        <img src="../Imagens/plant.gif" class="obstacle" />
+        <img src="../Imagens/coin.gif" class="coin">
+    </div>
+    <div class="audi">
+        <audio preload="metadata" autoplay controls loop>
+            <source
+                src="../midia/SnapInsta.io - Michael Jackson -  Beat It [Moonwalker Sega Mega Drive] [HQ] (128 kbps) (1).mp3"
+                type="audio/mpeg">
+            <p>Infelizmente seu navegador não consegue reproduzir o arquivo. Clique para baixá-lo: <a
+                    href="../midia/SnapInsta.io - Michael Jackson -  Beat It [Moonwalker Sega Mega Drive] [HQ] (128 kbps) (1).mp3"></a>
+                AQUI!!!</p>
+        </audio>
+    </div>
+    <br><br>
+    <div class="desc"><button onclick="startGame()">Iniciar Jogo</button></div>
+    <div class="desc">
+        <img src="../Imagens/R.gif" alt="" class="dance">
+    </div>
+    <script type="text/javascript">
+        let gameStarted = false;
+        function startGame() {
+            if (!gameStarted) {
+                document.querySelector('.game').style.display = 'block';
+                document.querySelector('.audi').style.display = 'none';
+                document.querySelector('.desc').style.display = 'none';
+                document.querySelector('button').style.display = 'none';
+                document.querySelector('.tutorial').style.display = 'none';
+                document.querySelector('.dance').style.display = 'none';
+                gameStarted = true;
+                const game = document.querySelector('.game');
+                const dino = document.querySelector('.dino');
+                const obstacle = document.querySelector('.obstacle');
+                const scoreDisplay = document.querySelector('.score');
+                const coin = document.querySelector('.coin');
+                let isJumping = false;
+                let gravity = 0.9;
+                let isGameOver = false;
+                let position = 0;
+                let score = 0;
+                let obstacleSpeed = 4;
+                let coinSpeed = 5;
+
+                function jump() {
+                    if (!isJumping) {
+                        isJumping = true;
+                        let upInterval = setInterval(() => {
+                            if (position >= 150) {
+                                clearInterval(upInterval);
+                                let downInterval = setInterval(() => {
+                                    if (position <= 0) {
+                                        clearInterval(downInterval);
+                                        isJumping = false;
+                                    } else {
+                                        position -= 6;
+                                        dino.style.bottom = position + 'px';
+                                    }
+                                }, 20);
+                            } else {
+                                position += 9;
+                                dino.style.bottom = position + 'px';
+                            }
+                        }, 20);
+                    }
+                }
+
+                document.addEventListener('click', jump);
+
+                function generateObstacle() {
+                    if (isGameOver) return;
+
+                    let obstaclePosition = 600;
+                    obstacle.style.left = obstaclePosition + 'px';
+
+                    function moveObstacle() {
+                        score += 1;
+                        let leftInterval = setInterval(() => {
+                            if (obstaclePosition < -20) {
+                                clearInterval(leftInterval);
+                                generateObstacle();
+                            } else if (obstaclePosition > 0 && obstaclePosition < 50 && position < 50) {
+                                clearInterval(leftInterval);
+                                isGameOver = true;
+                                window.alert('Fim de Jogo');
+                                document.body.innerHTML = '<h1 class="game-over">Fim de Jogo</h1>';
+                            } else {
+                                obstaclePosition -= obstacleSpeed;
+                                obstacle.style.left = obstaclePosition + 'px';
+                                if (obstaclePosition < -20) {
+                                    score += 10;
+                                    scoreDisplay.innerText = score;
+                                    if (score >= 1500) {
+                                        isGameOver = true;
+                                        window.alert('Você venceu');
+                                        document.body.innerHTML = '<h1>Você conseguiu, parabéns!</h1><img src="../Imagens/vaidarnamoro.jpg" alt="" style="width:100%; height:100%;">';
+                                    }
+                                }
+                            }
+                        }, 20);
+                    }
+
+                    moveObstacle();
+                }
+
+                generateObstacle();
+
+
+
+                function generateCoin() {
+                    if (isGameOver) return;
+
+                    let coinPosition = 600;
+                    coin.style.left = coinPosition + 'px';
+
+
+                    function moveCoin() {
+                        if (isGameOver) return;
+
+                        let coinPosition = 600;
+                        coin.style.left = coinPosition + 'px';
+
+                        function detectCollision() {
+                            const dinoLeft = dino.offsetLeft;
+                            const dinoRight = dino.offsetLeft + dino.offsetWidth;
+                            const coinLeft = coin.offsetLeft;
+                            const coinRight = coin.offsetLeft + coin.offsetWidth;
+
+                            if (coinLeft < dinoRight && coinRight > dinoLeft && position < 50) {
+                                coin.style.display = 'none';
+                                score += 1;
+                                scoreDisplay.innerText = score;
+                                setTimeout(() => {
+                                    coin.style.display = 'block';
+                                    coinPosition = 600;
+                                    coin.style.left = coinPosition + 'px';
+                                }, 1000);
+                            }
+                        }
+
+                        let leftInterval = setInterval(() => {
+                            if (coinPosition < -20) {
+                                clearInterval(leftInterval);
+                                coin.style.display = 'block';
+                                coinPosition = 600;
+                                coin.style.left = coinPosition + 'px';
+                            } else {
+                                coinPosition -= coinSpeed;
+                                coin.style.left = coinPosition + 'px';
+                                detectCollision();
+
+                                if (coinPosition < -20) {
+                                    score += 0;
+                                    scoreDisplay.innerText = score;
+                                    if (score >= 1500) {
+                                        isGameOver = true;
+                                        window.alert('Você venceu');
+                                        document.body.innerHTML = '<h1>Você conseguiu, parabéns!</h1><img src="../Imagens/vaidarnamoro.jpg" alt="" style="width:100%; height:100%;">';
+                                    }
+                                }
+                            }
+                        }, 20);
+                    }
+
+                    moveCoin();
+                }
+
+                setInterval(generateCoin, 4000)
+                setInterval(() => {
+                    // Aumente a velocidade do obstáculo a cada x segundos
+                    obstacleSpeed += 1;
+                    coinSpeed += 3;
+                }, 60000);
+            }
+        }
+    </script>
+</body>
+
+</html>
