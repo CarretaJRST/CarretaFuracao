@@ -1,0 +1,35 @@
+body, html{
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: center;
+    background-color: rgb(17, 29, 0);
+}
+section{
+    background-color: white;
+    padding: 0px;
+}
+section#max{
+    text-align: center;
+    background-color: rgb(17, 29, 0);
+    color: white;
+    padding: 0px;
+}
+img{
+    height: 100%;
+    margin: auto;
+}
+h1{
+    margin: 0px;
+    text-align: center;
+    font-style: oblique;
+}
+div#audi{
+    text-align: center;
+}
+img#r{
+    width: 60%;
+    height: 50%;
+}

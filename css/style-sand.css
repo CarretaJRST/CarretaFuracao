@@ -1,0 +1,32 @@
+body, html{
+    padding: 0px;
+    margin: 0px;
+    height: 100vh;
+    font-family: Arial, Helvetica, sans-serif;
+    font-weight: bold;
+    text-align: justify;
+    background-color: rgb(0, 0, 29);
+}
+section{
+    background-color: white;
+    padding: 0px;
+}
+section#max{
+    text-align: center;
+    background-color: rgb(0, 0, 29);
+    color: white;
+    padding: 0px;
+}
+img{
+    
+    height: 100%;
+    margin: auto;
+}
+h1{
+    margin: 0px;
+    text-align: center;
+    font-style: oblique;
+}
+div#aud{
+    display: none;
+}

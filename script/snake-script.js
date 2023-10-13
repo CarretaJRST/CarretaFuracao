@@ -128,5 +128,4 @@ function clickM() {
     const audio = new Audio(escolha[aleatorio])
     audio.play();
 }
-
 startGame(); // Inicia o jogo inicialmente

@@ -1,103 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MarioRun</title>
-    <style>
-        body {
-            margin: 0;
-            padding: 0;
-            background-color: #01012c;
-            color: white;
-            font-weight: bolder;
-        }
-
-        .game {
-            display: none;
-            width: 400px;
-            height: 550px;
-            background-color: #040139;
-            background-image: url('../Imagens/Media_231011_145754.gif');
-            background-position: center bottom;
-            border: 2px solid #000;
-            position: relative;
-            margin: 0 auto;
-            overflow: hidden;
-        }
-
-        button {
-            width: 100px;
-            height: 50px;
-            background-color: rgb(0, 58, 11);
-            z-index: 9;
-            border-radius: 10px;
-            color: white;
-        }
-
-        .dino {
-            width: 150px;
-            height: 100px;
-            margin-bottom: 10px;
-            position: absolute;
-            bottom: 0;
-            transform: scale(1.7);
-        }
-
-        .obstacle {
-            width: 80px;
-            height: 50px;
-            position: absolute;
-            bottom: 0;
-            left: 100%;
-        }
-
-        .score {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            font-size: 24px;
-        }
-
-        .desc,
-        .tutorial {
-            text-align: center;
-            font-size: 1.3em;
-        }
-
-        .audi {
-            text-align: center;
-        }
-
-        .titulo {
-            text-align: center;
-            color: #c80000;
-        }
-
-        .coin {
-            width: 50px;
-            height: 30px;
-            position: absolute;
-            bottom: 0;
-            left: 100%;
-        }
-    </style>
+    <link rel="stylesheet" href="../css/style-egg.css">
+    <title>Eggman</title>
 </head>
 
 <body>
-    <h1 class="titulo">SUPER MARIO <span style="color: white;">-</span> <span style="color: rgb(62, 167, 65)">Plants of
-            Trouble</span></h1>
+    <h1 class="titulo">Eggman's Announcement <br> <img src="../Imagens/eggman-announcement.gif"></h1>
     <div class="desc">
-        <p>Mário tem um encontro com a Princesa Peach hoje à noite no parque. Mas um bando de "Piranha Plants" estão em
-            seu caminho para impedi-lo de chegar a tempo, você poderá ajudá-lo?</p>
+        <p>Dr. Eggman escapou da cadeia e tem um anúncio a fazer para toda a população brasileira, mas a polícia está usando seus próprios robôs contra ele mesmo. Ajude-o!</p>
     </div>
     <div class="tutorial">
-        <h1 style="color: #06fefe;">Como Jogar?</h1>
-        <p>Toque na tela (ou clique no botão esquerdo do mouse) para pular as plantas.</p>
-        <p>A música tema está disponível para reprodução e download abaixo. Quando o jogo acabar, recarregue a página
-            para reiniciar o game.</p>
-        <p>Se quiser que a música volte a tocar, só apertar o play nela. O jogo acaba ao conseguir 1250 pontos. Tenha um
+        <h1 style="color: #d17600;">Como Jogar?</h1>
+        <p>Toque na tela (ou clique no botão esquerdo do mouse) para pular os badniks. Ao coletar anéis, você ganha 2 pontos.</p>
+        <p>A música tema está disponível para reprodução e download abaixo. Quando o jogo acabar, recarregue a página para reiniciar o game.</p>
+        <p>Se quiser que a música volte a tocar, só apertar o play nela. O jogo acaba ao conseguir 1500 pontos. Tenha um
             bom jogo!</p>
     </div>
     <div class="game">
@@ -122,7 +41,7 @@
     <br><br>
     <div class="desc"><button onclick="startGame()">Iniciar Jogo</button></div>
     <div class="desc">
-        <img src="../Imagens/R.gif" alt="" class="dance">
+        <img src="../Imagens/pisaoEggman.gif" alt="" class="dance">
     </div>
     <script type="text/javascript">
         let gameStarted = false;
@@ -134,6 +53,7 @@
                 document.querySelector('button').style.display = 'none';
                 document.querySelector('.tutorial').style.display = 'none';
                 document.querySelector('.dance').style.display = 'none';
+                document.querySelector('.titulo').style.display = 'none';
                 gameStarted = true;
                 const game = document.querySelector('.game');
                 const dino = document.querySelector('.dino');
@@ -196,10 +116,10 @@
                                 if (obstaclePosition < -20) {
                                     score += 10;
                                     scoreDisplay.innerText = score;
-                                    if (score >= 1500) {
+                                    if (score >= 1550) {
                                         isGameOver = true;
                                         window.alert('Você venceu');
-                                        document.body.innerHTML = '<h1>Você conseguiu, parabéns!</h1><img src="../Imagens/vaidarnamoro.jpg" alt="" style="width:100%; height:100%;">';
+                                        document.body.innerHTML = '<h1 style="text-align:center">Você conseguiu, parabéns!</h1><br><h2 style="text-align:center">Esse é o anúncio: </h2><br><div style="text-align:center"><video width="300" height="480" controls="controls"><source src="../midia/Eggman Bostil.mp4" type="video/mp4"></div>';
                                     }
                                 }
                             }
@@ -258,10 +178,9 @@
                                 if (coinPosition < -20) {
                                     score += 0;
                                     scoreDisplay.innerText = score;
-                                    if (score >= 1500) {
+                                    if (score >= 1550) {
                                         isGameOver = true;
-                                        window.alert('Você venceu');
-                                        document.body.innerHTML = '<h1>Você conseguiu, parabéns!</h1><img src="../Imagens/vaidarnamoro.jpg" alt="" style="width:100%; height:100%;">';
+                                        document.body.innerHTML = '<h1 style="text-align:center">Você conseguiu, parabéns!</h1><br><h2 style="text-align:center">Esse é o anúncio: </h2><br><div style="text-align:center"><video width="300" height="480" controls="controls"><source src="../midia/Eggman Bostil.mp4" type="video/mp4"></div>';
                                     }
                                 }
                             }
