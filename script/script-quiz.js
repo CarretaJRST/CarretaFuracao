@@ -2,22 +2,22 @@
 const questions = [
     {
         question: 'Quem é o mais fogarento do grupo?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', ''],
         answer: 'Juan'
     },
     {
         question: 'Quem é o mais pistola?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', ''],
         answer: 'Rian'
     },
     {
         question: 'Quem é mais safado(a)?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', ''],
         answer: 'Sanderson'
     },
     {
         question: 'Quem é mais falso moralista?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', ''],
         answer: 'Tiago'
     },
     {
@@ -142,22 +142,22 @@ const questions = [
     },
     {
         question: 'Quem é mais sentimental?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
         answer: 'Juan'
     },
     {
         question: 'Quem é mais palhaço?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
         answer: 'Tiago'
     },
     {
         question: 'Quem é o mais lerdo?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
         answer: 'Juan'
     },
     {
         question: 'Quem é o mais bananão?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
         answer: 'Sanderson'
     },
     {
@@ -167,83 +167,78 @@ const questions = [
     },
     {
         question: 'Quem foi o último(a) a entrar no grupo?',
-        options: ['Tiago', 'Juan', 'Rian', 'Emily'],
-        answer: 'Emily'
-    },
-    {
-        question: 'Quem é o mais romancista?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
-        answer: 'Emily'
-    },
-    {
-        question: 'Emily gosta de homens carecas/calvos?',
-        options: ['Eca, odeio', 'Oxi', 'Não', 'Siiiimmm', 'Cê sabe que eu não goxto de homem careca'],
-        answer: 'Cê sabe que eu não goxto de homem careca'
-    },
-    {
-        question: 'Qual o apelido da Emily?',
-        options: ['All options', 'Wandinha', 'Bebê', 'Patroa', 'Emi'],
-        answer: 'All options'
-    },
-    {
-        question: 'Quem é mais fã de Taylor Swift?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
-        answer: 'Sanderson'
-    },
-    {
-        question: 'Que dia a Emily Amanda se tornou a 5° integrante do grupo?',
-        options: ['18/08/2023', '19/08/2023', '20/08/2023', '15/08/2023', '21/08/2023'],
-        answer: '20/08/2023'
-    },
-    {
-        question: 'Quem convidou Emi pro grupo?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+        options: ['Tiago', 'Juan', 'Rian'],
         answer: 'Rian'
     },
     {
+        question: 'Quem é a namoradinha do Sand?',
+        options: ['Tiago', 'Patrick', 'Danieli', 'Dragão'],
+        answer: 'Danieli'
+    },
+    {
+        question: 'Quem é a namoradinha do Rian?',
+        options: ['Chrissy Constanza', 'Lisa', 'Ingrid', 'Larissa'],
+        answer: 'Ingrid'
+    },
+    {
+        question: 'Quem é mais fã de Taylor Swift?',
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
+        answer: 'Sanderson'
+    },
+    {
+        question: 'Qual dupla faz mais merda?',
+        options: ['Tiago e Sanderson', 'Rian e Juan', 'All options'],
+        answer: 'All options'
+    },
+    {
         question: 'O que tinha debaixo do Edredom?',
-        options: ['Um pau (cabo de vassoura)', 'Travesseiro do Tiago', 'Gases Tóxicos', 'Uma velha', 'A Emily'],
-        answer: 'Um pau (cabo de vassoura)'
+        options: ['Um pau (cabo de vassoura)', 'Travesseiro do Tiago', 'Gases Tóxicos', 'Uma velha', 'Duas bolas e um torpedo'],
+        answer: 'Duas bolas e um torpedo'
     },
     {
         question: 'Qual a melhor dupla do grupo?',
-        options: ['Tiago e Sanderson', 'Rian e Juan', 'Juan e Emily', 'Sanderson e Emily', 'Rian e Tiago', 'Emily e Rian', 'Tiago e Emily', 'All options'],
+        options: ['Tiago e Sanderson', 'Rian e Juan', 'Rian e Tiago', 'Sanderson e Juan', 'Tiago e Juan', 'Rian e Sanderson', 'All options'],
         answer: 'All options'
     },
     {
         question: 'Quem mais responde no atual grupo?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
-        answer: 'Emily'
-    },
-    {
-        question: 'Quem é mais medroso com as coisas?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
-        answer: 'Juan'
-    },
-    {
-        question: 'Por que o Quinteto de Trilhões não se chama 4 homens e 1 pitica?',
-        options: ['Nome feio pow', 'Batata', 'Errado, é 2 homens, 1 helicóptero de combate e 2 princesas', 'Pergunta no Posto Ipiranga', 'Sla'],
-        answer: 'Errado, é 2 homens, 1 helicóptero de combate e 2 princesas'
-    },
-    {
-        question: 'Quem fala mais besteira?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
         answer: 'Tiago'
     },
     {
+        question: 'Quem é mais medroso com as coisas?',
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan',],
+        answer: 'Juan'
+    },
+    {
+        question: 'Quem fala mais besteira?',
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Todos'],
+        answer: 'Todos'
+    },
+    {
         question: 'Quem ri mais alto?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
         answer: 'Rian'
     },
     {
         question: 'Quem é mais iludido(a)?',
-        options: ['Tiago', 'Sanderson', 'Rian', 'Juan', 'Emily'],
+        options: ['Tiago', 'Sanderson', 'Rian', 'Juan'],
         answer: 'Juan'
     },
     {
-        question: 'Emily deve ficar loira?',
-        options: ['É crime, não pode!', 'Sujeito a paulada', 'SIIIMMMMM', 'Ferrou'],
-        answer: 'SIIIMMMMM'
+        question: 'Qual o jogo OFICIAL do quarteto?',
+        options: ['Ultraman FE', 'Street Fighter', 'Lego (qualquer tipo)', 'GTA'],
+        answer: 'Lego (qualquer tipo)'
+    },
+    {
+        question: 'Quem era o Patrick?',
+        options: ['Me recuso a responder', 'Esquece essa merda', 'O amor perdido do Juan', 'O Patrick ué', 'BANIDO!'],
+        answer: 'BANIDO!'
+    },
+    {
+        question: 'Quem é o mais gado?',
+        options: ['Difícil', 'Sanderson', 'Rian', 'Juan', 'Tiago', 'Depende quem é a suggar mommy'],
+        answer: 'Depende quem é a suggar mommy'
     }
 ];
 

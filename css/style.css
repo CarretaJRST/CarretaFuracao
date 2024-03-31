@@ -57,7 +57,6 @@ menu > ul > li > a{
     display: block;
     padding: 10px;
     text-decoration: none;
-    text-align: center;
     color: white;
 }
 menu > ul > li > a:hover{
